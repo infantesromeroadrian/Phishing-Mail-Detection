@@ -1,0 +1,7 @@
+# Modelo y archivos grandes
+trained_model/** filter=lfs diff=lfs merge=lfs -text
+*.pth filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+*.bin filter=lfs diff=lfs merge=lfs -text
+# Entorno virtual (si necesitas versionarlo)
+phisingmail-detection-cuda/** filter=lfs diff=lfs merge=lfs -text 

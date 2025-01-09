@@ -1,2 +1,38 @@
+# Virtual Environment
+phisingmail-detection-cuda/
+venv/
+env/
 
-.codegpt
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Model files and directories
+trained_model/
+models/results/
+*.pth
+*.pt
+*.bin
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
