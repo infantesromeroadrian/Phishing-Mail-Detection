@@ -5,5 +5,19 @@
     "prediction": "Phishing Email",
     "confidence": 0.9982101917266846,
     "is_phishing": true
+  },
+  {
+    "timestamp": "2025-01-18T15:35:19.766907",
+    "email_preview": "Dear valued customer, Your account has been suspended. \n        Click here immediately to verify you...",
+    "prediction": "Phishing Email",
+    "confidence": 0.9981011748313904,
+    "is_phishing": true
+  },
+  {
+    "timestamp": "2025-01-18T15:35:38.253727",
+    "email_preview": "Hi team, Here's the agenda for tomorrow's meeting:\n        1. Project updates\n        2. Budget revi...",
+    "prediction": "Safe Email",
+    "confidence": 0.9996277093887329,
+    "is_phishing": false
   }
 ]

@@ -7,26 +7,18 @@ from utils.history import AnalysisHistory
 from pathlib import Path
 
 def load_model():
-    """Carga el modelo entrenado."""
-    model_path = Config.MODELS_DIR / Config.MODEL_PATH
-    print(f"Buscando modelo en: {model_path}")
-    
-    if not os.path.exists(model_path):
-        st.error(f"⚠️ Modelo no encontrado en {model_path}. Por favor, verifica la ubicación del modelo.")
-        # Intentar con ruta absoluta como fallback
-        fallback_path = Path("C:/Users/infan/OneDrive/Desktop/AIR/AIntelligence/AIProjects/PhishingMailDetection/models/trained_model")
-        if os.path.exists(fallback_path):
-            print(f"Usando ruta alternativa: {fallback_path}")
+    """Carga el modelo entrenado probando diferentes ubicaciones."""
+    for model_path in Config.MODEL_PATHS:
+        print(f"Intentando cargar modelo desde: {model_path}")
+        if os.path.exists(model_path):
+            print(f"Modelo encontrado en: {model_path}")
             return PhishingPredictor(
-                model_path=str(fallback_path),
+                model_path=str(model_path),
                 max_length=Config.MAX_LENGTH
             )
-        return None
     
-    return PhishingPredictor(
-        model_path=model_path,
-        max_length=Config.MAX_LENGTH
-    )
+    st.error("⚠️ Modelo no encontrado. Por favor, verifica la instalación.")
+    return None
 
 def display_analysis_results(col1, result):
     """Muestra los resultados del análisis en la columna especificada."""

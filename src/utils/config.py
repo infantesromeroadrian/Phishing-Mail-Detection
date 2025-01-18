@@ -4,7 +4,14 @@ class Config:
     # Rutas del proyecto
     PROJECT_ROOT = Path(__file__).parent.parent.parent
     DATA_DIR = PROJECT_ROOT / "data"
-    MODELS_DIR = PROJECT_ROOT / "models"
+    
+    # Rutas alternativas para el modelo
+    MODEL_PATHS = [
+        PROJECT_ROOT / "src" / "models" / "trained_model",  # Ruta principal
+        PROJECT_ROOT / "models" / "trained_model",          # Ruta alternativa 1
+        Path("models/trained_model"),                       # Ruta relativa
+        Path("/mount/src/phishing-mail-detection/src/models/trained_model")  # Ruta Streamlit Cloud
+    ]
     
     # Configuración del modelo
     MODEL_NAME = "bert-base-uncased"
@@ -21,7 +28,6 @@ class Config:
     RAW_DATA_FILE = "Phishing_Email.csv"
     CLEANED_DATA_FILE = "cleaned_phishing_email.csv"
     TOKENIZED_DATA_DIR = "tokenized_phishing_email"
-    MODEL_PATH = "trained_model"
     
     # Columnas del dataset
     TEXT_COLUMN = "Email Text"
