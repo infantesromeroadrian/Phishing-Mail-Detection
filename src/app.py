@@ -9,15 +9,26 @@ from pathlib import Path
 def load_model():
     """Carga el modelo entrenado probando diferentes ubicaciones."""
     for model_path in Config.MODEL_PATHS:
-        print(f"Intentando cargar modelo desde: {model_path}")
-        if os.path.exists(model_path):
-            print(f"Modelo encontrado en: {model_path}")
-            return PhishingPredictor(
-                model_path=str(model_path),
-                max_length=Config.MAX_LENGTH
-            )
+        try:
+            print(f"Intentando cargar modelo desde: {model_path}")
+            if os.path.exists(model_path):
+                print(f"Modelo encontrado en: {model_path}")
+                predictor = PhishingPredictor(
+                    model_path=str(model_path),
+                    max_length=Config.MAX_LENGTH
+                )
+                # Verificar que el modelo se cargó correctamente
+                test_text = "Test email"
+                predictor.predict(test_text)
+                return predictor
+        except Exception as e:
+            print(f"Error al cargar desde {model_path}: {str(e)}")
+            continue
     
     st.error("⚠️ Modelo no encontrado. Por favor, verifica la instalación.")
+    st.info("Rutas probadas:")
+    for path in Config.MODEL_PATHS:
+        st.code(str(path))
     return None
 
 def display_analysis_results(col1, result):
