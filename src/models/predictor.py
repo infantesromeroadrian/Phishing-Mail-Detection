@@ -2,19 +2,22 @@ import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 
 class PhishingPredictor:
-    def __init__(self, model_path, tokenizer_path=None, max_length=128):
+    def __init__(self, model_id="infantesromeroadrian/phishing-detection-bert", max_length=128):
         """
-        Inicializa el predictor con el modelo y tokenizador guardados.
-        :param model_path: Ruta al modelo guardado
-        :param tokenizer_path: Ruta al tokenizador (si es diferente del modelo)
+        Inicializa el predictor cargando el modelo desde Hugging Face Hub.
+        :param model_id: ID del modelo en Hugging Face Hub
         :param max_length: Longitud máxima de la secuencia
         """
-        self.model = BertForSequenceClassification.from_pretrained(model_path)
-        self.tokenizer = BertTokenizer.from_pretrained(tokenizer_path or model_path)
-        self.max_length = max_length
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)
-        self.model.eval()
+        try:
+            self.model = BertForSequenceClassification.from_pretrained(model_id)
+            self.tokenizer = BertTokenizer.from_pretrained(model_id)
+            self.max_length = max_length
+            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            self.model.to(self.device)
+            self.model.eval()
+        except Exception as e:
+            print(f"Error al cargar el modelo: {str(e)}")
+            raise
 
     def preprocess_text(self, text):
         """Preprocesa el texto para la predicción."""

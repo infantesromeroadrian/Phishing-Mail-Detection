@@ -7,10 +7,9 @@ class Config:
     
     # Rutas alternativas para el modelo
     MODEL_PATHS = [
-        Path("/mount/src/phishing-mail-detection/src/models/trained_model"),  # Streamlit Cloud
-        Path("/app/src/models/trained_model"),                               # Alternativa Streamlit
-        PROJECT_ROOT / "src" / "models" / "trained_model",                   # Local desarrollo
-        PROJECT_ROOT / "models" / "trained_model",                           # Local alternativo
+        PROJECT_ROOT / "models" / "trained_model",          # Ruta principal
+        Path("/mount/src/phishing-mail-detection/models/trained_model"),  # Streamlit Cloud
+        Path("models/trained_model"),                       # Ruta relativa
     ]
     
     # Configuración del modelo
